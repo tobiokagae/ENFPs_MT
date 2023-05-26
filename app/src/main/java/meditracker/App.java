@@ -26,7 +26,7 @@ public class App extends Application {
     private void SceneAwal(){
         Label label = new Label("  Welcome To");
         label.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 25px; -fx-text-color: #000000;");
-        Label label2 = new Label("AlmShoeStore");
+        Label label2 = new Label("MediTracker");
         label2.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 35px; -fx-text-color: #000000;");
 
         VBox vbox1 =new VBox(label,label2);
@@ -74,7 +74,7 @@ public class App extends Application {
         // asli.getChildren().addAll(vbox1,vbox2,vbox3);
         
         Scene scene1 = new Scene(asli,620,620);
-        stage.setTitle("AlmShoeStore");
+        stage.setTitle("MediTracker");
         stage.setScene(scene1);
 
         passwordField.setOnAction(event -> button1.fire());
