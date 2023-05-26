@@ -3,12 +3,15 @@
  */
 package meditracker;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+public class App extends Application {
+    private Stage stage;
+    public void start(Stage primaryStage) throws Exception{
+        
+        stage = primaryStage;      
+        stage.show();
+
     }
 }
