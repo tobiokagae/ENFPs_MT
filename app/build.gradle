@@ -11,9 +11,11 @@ repositories {
 dependencies {
     // Use JUnit test framework.
     testImplementation 'junit:junit:4.13.2'
-
+    implementation 'mysql:mysql-connector-java:8.0.32'
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'org.openjfx:javafx-controls:17.0.0'
+    implementation 'org.openjfx:javafx-fxml:17.0.0'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
