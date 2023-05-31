@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,37 +28,37 @@ public class App extends Application {
         vBox.setSpacing(5);
         vBox.setAlignment(Pos.CENTER);
 
-        Label label1 = new Label("MediTracker");
-        label1.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 35px; -fx-text-color: #000000; -fx-font-weight: bold;");
-        vBox.getChildren().add(label1);
+        Label label = new Label("MediTracker");
+        label.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 35px; -fx-text-color: #000000; -fx-font-weight: bold;");
+        vBox.getChildren().add(label);
 
         ImageView logo = new ImageView(new Image("/meditrckr.png"));
         logo.setFitHeight(150);
         logo.setFitWidth(150);
         vBox.getChildren().add(logo);
 
-        Button button1 = new Button("LOG IN");
-        button1.setStyle("-fx-font-family: 'Cambria';-fx-padding: 10px 80px;-fx-font-size: 15px;-fx-background-color: #C4DFDF; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
-        button1.setOnAction(v -> {createScenePortal();});
-        vBox.getChildren().add(button1);
+        Button buttonLogin = new Button("LOG IN");
+        buttonLogin.setStyle("-fx-font-family: 'Cambria';-fx-padding: 10px 80px;-fx-font-size: 15px;-fx-background-color: #C4DFDF; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
+        buttonLogin.setOnAction(v -> {createScenePortal();});
+        vBox.getChildren().add(buttonLogin);
 
-        Button button2 = new Button("SIGN UP");
-        button2.setStyle("-fx-font-family: 'Cambria';-fx-padding: 10px 76px;-fx-font-size: 15px;-fx-background-color: #C4DFDF; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
-        button2.setOnAction(v -> {createSceneSignUp();});
-        vBox.getChildren().add(button2);
+        Button buttonSignup = new Button("SIGN UP");
+        buttonSignup.setStyle("-fx-font-family: 'Cambria';-fx-padding: 10px 76px;-fx-font-size: 15px;-fx-background-color: #C4DFDF; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
+        buttonSignup.setOnAction(v -> {createSceneSignUp();});
+        vBox.getChildren().add(buttonSignup);
 
         HBox hBox1 = new HBox(10,vBox);
         hBox1.setAlignment(Pos.CENTER);
         
-        Scene scene1 = new Scene(hBox1,620,620);
+        Scene scene1 = new Scene(hBox1,480, 720);
         stage.setTitle("MediTracker");
         stage.setScene(scene1);
     }
 
     private void createSceneLogInDokter() {
-        Label label1 = new Label("Log-In");
-        label1.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 35px; -fx-text-color: #000000; -fx-font-weight: bold;");
-        HBox hBox1 = new HBox(label1);
+        Label label = new Label("Log-In");
+        label.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 35px; -fx-text-color: #000000; -fx-font-weight: bold;");
+        HBox hBox1 = new HBox(label);
         hBox1.setAlignment(Pos.CENTER);
 
         Text textId = new Text("ID:");
@@ -65,10 +66,11 @@ public class App extends Application {
         HBox hBox2 = new HBox(textId);
         hBox2.setAlignment(Pos.CENTER);
 
-        TextField textField3 = new TextField();
-        textField3.setStyle("-fx-padding: 1px 80px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
-        textField3.setPromptText("Masukkan ID...");
-        HBox hBox3 = new HBox(textField3);
+        TextField idField = new TextField();
+        idField.setStyle("-fx-padding: 1px 60px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
+        idField.setPromptText("Masukkan ID...");
+        idField.setAlignment(Pos.CENTER);
+        HBox hBox3 = new HBox(idField);
         hBox3.setAlignment(Pos.CENTER);
 
         Text textPassword = new Text("Password:");
@@ -76,16 +78,17 @@ public class App extends Application {
         HBox hBox4 = new HBox(textPassword);
         hBox4.setAlignment(Pos.CENTER);
 
-        TextField textField4 = new TextField();
-        textField4.setStyle("-fx-padding: 1px 80px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
-        textField4.setPromptText("Masukkan Password...");
-        HBox hBox5 = new HBox(textField4);
+        PasswordField passwordField = new PasswordField();
+        passwordField.setStyle("-fx-padding: 1px 60px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
+        passwordField.setPromptText("Masukkan Password...");
+        passwordField.setAlignment(Pos.CENTER);
+        HBox hBox5 = new HBox(passwordField);
         hBox5.setAlignment(Pos.CENTER);
 
-        Button button1 = new Button("MASUK");
-        button1.setStyle("-fx-background-color: #C4DFDF;-fx-font-family: 'Cambria';-fx-padding: 10px 80px;-fx-font-size: 15px; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
-        button1.setOnAction(v -> {createScenePortalDokter();});
-        HBox hBox6 = new HBox(button1);
+        Button buttonSignin = new Button("SIGN IN");
+        buttonSignin.setStyle("-fx-background-color: #C4DFDF;-fx-font-family: 'Cambria';-fx-padding: 10px 80px;-fx-font-size: 15px; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
+        buttonSignin.setOnAction(v -> {createScenePortalDokter();});
+        HBox hBox6 = new HBox(buttonSignin);
         hBox6.setAlignment(Pos.CENTER);
 
         VBox vBox1 = new VBox(5, hBox2, hBox3, hBox4, hBox5);
@@ -94,7 +97,7 @@ public class App extends Application {
         VBox vBox2 = new VBox(15, hBox1, vBox1, hBox6);
         vBox2.setAlignment(Pos.CENTER);
 
-        Scene sceneLogInDokter = new Scene(vBox2, 620, 620);
+        Scene sceneLogInDokter = new Scene(vBox2, 480, 720);
         stage.setTitle("MediTracker");
         stage.setScene(sceneLogInDokter);
     }
@@ -110,16 +113,16 @@ public class App extends Application {
         HBox hBox1 = new HBox(text);
         hBox1.setAlignment(Pos.CENTER);
 
-        Button button1 = new Button("PORTAL DOKTER");
-        button1.setStyle("-fx-font-family: 'Cambria';-fx-padding: 10px 76px;-fx-font-size: 15px;-fx-background-color: #C4DFDF; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
-        button1.setOnAction(v -> {createSceneLogInDokter();});
-        HBox hBox2 = new HBox(button1);
+        Button buttonPortalD = new Button("PORTAL DOKTER");
+        buttonPortalD.setStyle("-fx-font-family: 'Cambria';-fx-padding: 10px 76px;-fx-font-size: 15px;-fx-background-color: #C4DFDF; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
+        buttonPortalD.setOnAction(v -> {createSceneLogInDokter();});
+        HBox hBox2 = new HBox(buttonPortalD);
         hBox2.setAlignment(Pos.CENTER);
 
-        Button button2 = new Button("PORTAL PASIEN");
-        button2.setStyle("-fx-font-family: 'Cambria';-fx-padding: 10px 80px;-fx-font-size: 15px;-fx-background-color: #C4DFDF; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
-        button2.setOnAction(v -> {createSceneLogInPasien();});
-        HBox hBox3 = new HBox(button2);
+        Button buttonPortalP = new Button("PORTAL PASIEN");
+        buttonPortalP.setStyle("-fx-font-family: 'Cambria';-fx-padding: 10px 80px;-fx-font-size: 15px;-fx-background-color: #C4DFDF; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
+        buttonPortalP.setOnAction(v -> {createSceneLogInPasien();});
+        HBox hBox3 = new HBox(buttonPortalP);
         hBox3.setAlignment(Pos.CENTER);
 
         VBox vBox2 = new VBox(5, hBox, hBox1);
@@ -131,16 +134,16 @@ public class App extends Application {
         VBox vBox4 = new VBox(20, vBox2, vBox3);
         vBox4.setAlignment(Pos.CENTER);
 
-        Scene scenePortal = new Scene(vBox4, 620, 620);
+        Scene scenePortal = new Scene(vBox4, 480, 720);
         stage.setTitle("MediTracker");
         stage.setScene(scenePortal);
 
     }
 
     private void createSceneLogInPasien() {
-        Label label1 = new Label("Log-In");
-        label1.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 35px; -fx-text-color: #000000; -fx-font-weight: bold;");
-        HBox hBox1 = new HBox(label1);
+        Label label = new Label("Log-In");
+        label.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 35px; -fx-text-color: #000000; -fx-font-weight: bold;");
+        HBox hBox1 = new HBox(label);
         hBox1.setAlignment(Pos.CENTER);
 
         Text textUsername = new Text("Username:");
@@ -148,10 +151,11 @@ public class App extends Application {
         HBox hBox2 = new HBox(textUsername);
         hBox2.setAlignment(Pos.CENTER);
 
-        TextField textField3 = new TextField();
-        textField3.setStyle("-fx-padding: 1px 80px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
-        textField3.setPromptText("Masukkan Username...");
-        HBox hBox3 = new HBox(textField3);
+        TextField usernameField = new TextField();
+        usernameField.setStyle("-fx-padding: 1px 60px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
+        usernameField.setPromptText("Masukkan Username...");
+        usernameField.setAlignment(Pos.CENTER);
+        HBox hBox3 = new HBox(usernameField);
         hBox3.setAlignment(Pos.CENTER);
 
         Text textPassword = new Text("Password:");
@@ -159,16 +163,17 @@ public class App extends Application {
         HBox hBox4 = new HBox(textPassword);
         hBox4.setAlignment(Pos.CENTER);
 
-        TextField textField4 = new TextField();
-        textField4.setStyle("-fx-padding: 1px 80px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
-        textField4.setPromptText("Masukkan Password...");
-        HBox hBox5 = new HBox(textField4);
+        PasswordField passwordField = new PasswordField();
+        passwordField.setStyle("-fx-padding: 1px 60px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
+        passwordField.setPromptText("Masukkan Password...");
+        passwordField.setAlignment(Pos.CENTER);
+        HBox hBox5 = new HBox(passwordField);
         hBox5.setAlignment(Pos.CENTER);
 
-        Button button1 = new Button("MASUK");
-        button1.setStyle("-fx-background-color: #C4DFDF;-fx-font-family: 'Cambria';-fx-padding: 10px 80px;-fx-font-size: 15px; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
-        button1.setOnAction(v -> {createScenePortalPasien();});
-        HBox hBox6 = new HBox(button1);
+        Button buttonSignin = new Button("SIGN IN");
+        buttonSignin.setStyle("-fx-background-color: #C4DFDF;-fx-font-family: 'Cambria';-fx-padding: 10px 80px;-fx-font-size: 15px; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
+        buttonSignin.setOnAction(v -> {createScenePortalPasien();});
+        HBox hBox6 = new HBox(buttonSignin);
         hBox6.setAlignment(Pos.CENTER);
 
         VBox vBox1 = new VBox(5, hBox2, hBox3, hBox4, hBox5);
@@ -177,21 +182,22 @@ public class App extends Application {
         VBox vBox2 = new VBox(15, hBox1, vBox1, hBox6);
         vBox2.setAlignment(Pos.CENTER);
 
-        Scene sceneLogInPasien = new Scene(vBox2, 620, 620);
+        Scene sceneLogInPasien = new Scene(vBox2, 480, 720);
         stage.setTitle("MediTracker");
         stage.setScene(sceneLogInPasien);
     }
 
     private void createScenePortalPasien() {
+        
     }
 
     private void createScenePortalDokter() {
     }
 
     private void createSceneSignUp() {
-        Label label1 = new Label("Sign-Up");
-        label1.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 35px; -fx-text-color: #000000; -fx-font-weight: bold;");
-        HBox hBox1 = new HBox(label1);
+        Label label = new Label("Sign-Up");
+        label.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 35px; -fx-text-color: #000000; -fx-font-weight: bold;");
+        HBox hBox1 = new HBox(label);
         hBox1.setAlignment(Pos.CENTER);
 
         Text textNama = new Text("Nama:");
@@ -200,10 +206,11 @@ public class App extends Application {
         HBox hBox2 = new HBox(textNama);
         hBox2.setAlignment(Pos.CENTER);
 
-        TextField textField1 = new TextField();
-        textField1.setStyle("-fx-padding: 1px 80px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
-        textField1.setPromptText("Masukkan Nama...");
-        HBox hBox3 = new HBox(textField1);
+        TextField namaField = new TextField();
+        namaField.setStyle("-fx-padding: 1px 60px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
+        namaField.setPromptText("Masukkan Nama...");
+        namaField.setAlignment(Pos.CENTER);
+        HBox hBox3 = new HBox(namaField);
         hBox3.setAlignment(Pos.CENTER);
 
         Text textEmail = new Text("E-Mail:");
@@ -212,10 +219,11 @@ public class App extends Application {
         HBox hBox4 = new HBox(textEmail);
         hBox4.setAlignment(Pos.CENTER);
 
-        TextField textField2 = new TextField();
-        textField2.setStyle("-fx-padding: 1px 80px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
-        textField2.setPromptText("Masukkan E-Mail...");
-        HBox hBox5 = new HBox(textField2);
+        TextField emailField = new TextField();
+        emailField.setStyle("-fx-padding: 1px 60px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
+        emailField.setPromptText("Masukkan E-Mail...");
+        emailField.setAlignment(Pos.CENTER);
+        HBox hBox5 = new HBox(emailField);
         hBox5.setAlignment(Pos.CENTER);
 
         Text textUsername = new Text("Username:");
@@ -224,10 +232,11 @@ public class App extends Application {
         HBox hBox6 = new HBox(textUsername);
         hBox6.setAlignment(Pos.CENTER);
 
-        TextField textField3 = new TextField();
-        textField3.setStyle("-fx-padding: 1px 80px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
-        textField3.setPromptText("Masukkan Username...");
-        HBox hBox7 = new HBox(textField3);
+        TextField usernameField = new TextField();
+        usernameField.setStyle("-fx-padding: 1px 60px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
+        usernameField.setPromptText("Masukkan Username...");
+        usernameField.setAlignment(Pos.CENTER);
+        HBox hBox7 = new HBox(usernameField);
         hBox7.setAlignment(Pos.CENTER);
 
         Text textPassword = new Text("Password:");
@@ -236,10 +245,11 @@ public class App extends Application {
         HBox hBox8 = new HBox(textPassword);
         hBox8.setAlignment(Pos.CENTER);
 
-        TextField textField4 = new TextField();
-        textField4.setStyle("-fx-padding: 1px 80px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
-        textField4.setPromptText("Masukkan Password...");
-        HBox hBox9 = new HBox(textField4);
+        PasswordField passwordField = new PasswordField();
+        passwordField.setStyle("-fx-padding: 1px 60px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
+        passwordField.setPromptText("Masukkan Password...");
+        passwordField.setAlignment(Pos.CENTER);
+        HBox hBox9 = new HBox(passwordField);
         hBox9.setAlignment(Pos.CENTER);
 
         Text textUmur = new Text("Umur: (*dalam angka)");
@@ -248,16 +258,17 @@ public class App extends Application {
         HBox hBox10 = new HBox(textUmur);
         hBox10.setAlignment(Pos.CENTER);
 
-        TextField textField5 = new TextField();
-        textField5.setStyle("-fx-padding: 1px 80px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
-        textField5.setPromptText("Masukkan Umur...");
-        HBox hBox11 = new HBox(textField5);
+        TextField umurField = new TextField();
+        umurField.setStyle("-fx-padding: 1px 60px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
+        umurField.setPromptText("Masukkan Umur...");
+        umurField.setAlignment(Pos.CENTER);
+        HBox hBox11 = new HBox(umurField);
         hBox11.setAlignment(Pos.CENTER);
 
-        Button button1 = new Button("NEXT");
-        button1.setStyle("-fx-background-color: #C4DFDF;-fx-font-family: 'Cambria';-fx-padding: 10px 80px;-fx-font-size: 15px; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
-        button1.setOnAction(v -> {createSceneBerhasil();});
-        HBox hBox12 = new HBox(button1);
+        Button buttonSignup = new Button("SIGN UP");
+        buttonSignup.setStyle("-fx-background-color: #C4DFDF;-fx-font-family: 'Cambria';-fx-padding: 10px 80px;-fx-font-size: 15px; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
+        buttonSignup.setOnAction(v -> {createSceneBerhasil();});
+        HBox hBox12 = new HBox(buttonSignup);
         hBox12.setAlignment(Pos.CENTER);
 
         VBox vBox1 = new VBox(10, hBox2, hBox3, hBox4, hBox5, hBox6, hBox7, hBox8, hBox9, hBox10, hBox11);
@@ -266,22 +277,22 @@ public class App extends Application {
         VBox vBox2 = new VBox(15, hBox1, vBox1, hBox12);
         vBox2.setAlignment(Pos.CENTER);
 
-        Scene sceneSignUp = new Scene(vBox2, 620, 620);
+        Scene sceneSignUp = new Scene(vBox2, 480, 720);
         stage.setTitle("MediTracker");
         stage.setScene(sceneSignUp);
     }
 
     private void createSceneBerhasil() {
         Label label = new Label("SELAMAT!!!");
-        label.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 40px; -fx-text-color: #000000; -fx-font-weight: bold;");
+        label.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 37px; -fx-text-color: #000000; -fx-font-weight: bold;");
         
-        Text text = new Text("Anda telah berhasil membuat akun! \nsSilahkan kembali ke halaman utama");
+        Text text = new Text("Anda telah berhasil membuat akun! \nSilahkan kembali ke halaman utama");
         text.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 15px;");
 
-        Button button = new Button("KEMBALI");
-        button.setStyle("-fx-background-color: #C4DFDF;-fx-font-family: 'Cambria';-fx-font-size: 13px; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
-        button.setOnAction(v -> {createScene1();});
-        HBox hBox = new HBox(button);
+        Button buttonBack = new Button("BACK");
+        buttonBack.setStyle("-fx-background-color: #C4DFDF;-fx-font-family: 'Cambria';-fx-font-size: 13px; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-border-radius: 3;");
+        buttonBack.setOnAction(v -> {createScene1();});
+        HBox hBox = new HBox(buttonBack);
         hBox.setAlignment(Pos.CENTER);
 
         VBox vBox1 = new VBox(7, label, text);
@@ -290,7 +301,7 @@ public class App extends Application {
         VBox vBox = new VBox(15, vBox1, hBox);
         vBox.setAlignment(Pos.CENTER);
 
-        Scene sceneBerhasil = new Scene(vBox, 620, 620);
+        Scene sceneBerhasil = new Scene(vBox, 480, 720);
         stage.setTitle("MediTracker");
         stage.setScene(sceneBerhasil);
     }
