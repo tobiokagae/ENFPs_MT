@@ -20,6 +20,11 @@ public class cntlr {
                 statement.execute();
                 System.out.println("Success To Add Table");
             }
+            String createTbRiwayatSql = "CREATE TABLE IF NOT EXISTS tb_riwayat (Username VARCHAR VARCHAR PRIMARY KEY, Diagnosis VARCHAR, Desxription, Username VARCHAR PRIMARY KEY, Password VARCHAR(255))";
+            try (PreparedStatement statement = connection.prepareStatement(createTbRiwayatSql)) {
+                statement.execute();
+                System.out.println("Success To Add Table");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
