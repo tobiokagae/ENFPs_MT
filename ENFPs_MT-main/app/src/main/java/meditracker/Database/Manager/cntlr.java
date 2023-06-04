@@ -161,7 +161,7 @@ public class cntlr {
         }
     }
 
-    public static void main(String[] args) {
+    // public static void main(String[] args) {
         // createTable();
         // insertDataDokter(71221160, "dr. Lil", "8593");
         // insertDataPasien("Alisha", "alisha@gmail.com", 18, "aclisung", "aclisakit");
@@ -169,4 +169,4 @@ public class cntlr {
         // seeDataPasien();
         // dropTablePasien();
     }
-}
+
