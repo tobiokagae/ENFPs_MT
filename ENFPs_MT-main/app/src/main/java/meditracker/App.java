@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -27,7 +28,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+// import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -66,8 +67,9 @@ public class App extends Application {
 
         TextField idField = new TextField();
         idField.setPromptText("Masukkan ID...");
-        idField.setStyle("-fx-padding: 1px 60px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
+        idField.setStyle("-fx-padding: 1px 60px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3; -fx-font-weight: bold;");
         idField.setAlignment(Pos.CENTER);
+        idField.setMinWidth(150);
         HBox idFieldBox = new HBox(idField);
         idFieldBox.setAlignment(Pos.CENTER);
 
@@ -81,8 +83,10 @@ public class App extends Application {
         pinField.setPromptText("Masukkan PIN...");
         pinField.setStyle("-fx-padding: 1px 60px;-fx-text-fill:BLACK;-fx-font-size: 15px;-fx-background-color: #FFFAF4; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3; -fx-font-weight: bold;");
         pinField.setAlignment(Pos.CENTER);
+        pinField.setMinWidth(150);
         HBox pinFieldBox = new HBox(pinField);
         pinFieldBox.setAlignment(Pos.CENTER);
+
 
         Button logInButton = new Button("LOG IN");
         logInButton.setStyle("-fx-background-color: #C4DFDF;-fx-font-family: 'Arial';-fx-padding: 10px 80px;-fx-font-size: 15px; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-background-radius: 42px; -fx-border-radius: 42px; -fx-font-weight: bold;");
@@ -118,6 +122,66 @@ public class App extends Application {
                 pause2.setOnFinished(event -> {createSceneLogIn();});
                 pause2.play();
             }
+            logInButton.setOnAction(e -> {
+                    String enteredID = idField.getText();
+                    String enteredPIN = pinField.getText();
+                
+                    if (enteredID.isEmpty() || enteredPIN.isEmpty()) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Harap Masukkan ID dan PIN");
+                
+                        // Mengatur gaya visual Alert
+                        alert.getDialogPane().setStyle(
+                                "-fx-background-color: #F8E0E0; " +
+                                "-fx-border-color: #FF0000; " +
+                                "-fx-border-width: 2px;" +
+                                "-fx-font-weight: bold;");
+                
+                    //     alert.showAndWait();
+                    // } else if (enteredID.equals("ID benar") && enteredPIN.equals("PIN salah")) {
+                    //     Alert alert = new Alert(Alert.AlertType.ERROR);
+                    //     alert.setTitle("Error");
+                    //     alert.setHeaderText(null);
+                    //     alert.setContentText("Password salah");
+                
+                    //     // Mengatur gaya visual Alert
+                    //     alert.getDialogPane().setStyle(
+                    //             "-fx-background-color: #F8E0E0; " +
+                    //             "-fx-border-color: #FF0000; " +
+                    //             "-fx-border-width: 2px;" +
+                    //             "-fx-font-weight: bold;");
+                
+                    //     alert.showAndWait();
+                    // } else if (enteredID.equals("ID salah") && enteredPIN.equals("PIN sudah benar")) {
+                    //     Alert alert = new Alert(Alert.AlertType.ERROR);
+                    //     alert.setTitle("Error");
+                    //     alert.setHeaderText(null);
+                    //     alert.setContentText("ID salah");
+                
+                        // Mengatur gaya visual Alert
+                        alert.getDialogPane().setStyle(
+                                "-fx-background-color: #F8E0E0; " +
+                                "-fx-border-color: #FF0000; " +
+                                "-fx-border-width: 2px;" +
+                                "-fx-font-weight: bold;");
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("ID dan Password salah");
+                
+                        // Mengatur gaya visual Alert
+                        alert.getDialogPane().setStyle(
+                                "-fx-background-color: #F8E0E0; " +
+                                "-fx-border-color: #FF0000; " +
+                                "-fx-border-width: 2px;" +
+                                "-fx-font-weight: bold;");
+                        alert.showAndWait();
+                    }
+                });
+                
         });
 
         VBox inputBox = new VBox(4, idBox, idFieldBox, pinBox, pinFieldBox);
