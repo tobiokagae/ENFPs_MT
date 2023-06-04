@@ -10,28 +10,28 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+// import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+// import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+// import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-// import meditracker.Database.Manager.cntlr;
 
 public class App extends Application {
-    protected Stage stage;
+    private Stage stage;
     private ObservableList<String> listPasien;
     public void start(Stage primaryStage) throws Exception{
         stage = primaryStage;  
@@ -44,17 +44,18 @@ public class App extends Application {
         stage.show();
     }
 
-    private void createSceneLogIn() {
+    public void createSceneLogIn() {
+        Image image = new Image("/fotoo.jpg");
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(620);
+        imageView.setFitWidth(620);
+        StackPane root = new StackPane();
+        root.getChildren().add(imageView);
+
         Label mediTracker = new Label("MediTracker");
         mediTracker.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 35px; -fx-text-color: #000000; -fx-font-weight: bold;");
         HBox logInBox = new HBox(mediTracker);
         logInBox.setAlignment(Pos.CENTER);
-        
-        ImageView logo = new ImageView(new Image("/meditrckr.png"));
-        logo.setFitHeight(150);
-        logo.setFitWidth(150);
-        HBox logoBox = new HBox(logo);
-        logoBox.setAlignment(Pos.CENTER);
 
         Label labelID = new Label("ID :");
         labelID.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 15px; -fx-text-color: #000000;");
@@ -99,9 +100,7 @@ public class App extends Application {
 
                     ResultSet resultSet = statement.executeQuery();
                     if (resultSet.next()) {
-                        PauseTransition pause = new PauseTransition(Duration.seconds(1));
-                        pause.setOnFinished(event -> createScenePortal());
-                        pause.play();
+                        createScenePortal();
                     } else {
                         PauseTransition pause2 = new PauseTransition(Duration.seconds(1));
                         pause2.setOnFinished(event -> {createSceneLogIn();});
@@ -114,24 +113,34 @@ public class App extends Application {
                     e.printStackTrace();
                 }
             } else {
-                PauseTransition pause2 = new PauseTransition(Duration.seconds(2));
+                PauseTransition pause2 = new PauseTransition(Duration.seconds(1));
                 pause2.setOnFinished(event -> {createSceneLogIn();});
                 pause2.play();
             }
         });
 
         VBox inputBox = new VBox(4, idBox, idFieldBox, pinBox, pinFieldBox);
-        VBox screenBox = new VBox(20, logInBox, logoBox, inputBox, logInButtonBox);
+        VBox screenBox = new VBox(20, logInBox, inputBox, logInButtonBox);
         screenBox.setAlignment(Pos.CENTER);
+        screenBox.setPadding(new Insets(255, 0, 0, 0));
+        root.getChildren().add(screenBox);
+        // screenBox.setBackground(null);
 
-        Scene sceneLogIn = new Scene(screenBox, 620, 620);
+        Scene sceneLogIn = new Scene(root, 620, 620);
         stage.setTitle("MediTracker");
         stage.setScene(sceneLogIn);
     }
 
     public void createScenePortal() {
+        Image image = new Image("/foto.jpg");
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(620);
+        imageView.setFitWidth(620);
+        StackPane root = new StackPane();
+        root.getChildren().add(imageView);
+
         Label labelDaftarPasien = new Label("Daftar Pasien");
-        labelDaftarPasien.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 35px; -fx-text-color: #000000; -fx-font-weight: bold;");
+        labelDaftarPasien.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 28px; -fx-text-color: #000000; -fx-font-weight: bold;");
         HBox daftarPasienBox = new HBox(labelDaftarPasien);
         daftarPasienBox.setAlignment(Pos.CENTER);
 
@@ -154,7 +163,7 @@ public class App extends Application {
         TextField tfName = new TextField();
         tfName.setPromptText("Masukkan Nama Pasien...");
         
-        Button btnAdd = new Button("Tambah");
+        Button btnAdd = new Button("TAMBAH");
         btnAdd.setStyle("-fx-background-color: #C4DFDF;-fx-font-family: 'Cambria';-fx-font-size: 15px; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-background-radius: 42px; -fx-border-radius: 42px;");
         btnAdd.setOnAction(v -> {
             String namaPasien = tfName.getText();
@@ -162,22 +171,48 @@ public class App extends Application {
             simpanKeDatabase(namaPasien);
         });
         
-        Button btnRemove = new Button("Hapus");
+        Button btnRemove = new Button("HAPUS");
         btnRemove.setStyle("-fx-background-color: #C4DFDF;-fx-font-family: 'Cambria';-fx-font-size: 15px; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-background-radius: 42px; -fx-border-radius: 42px;");        
         btnRemove.setOnAction(v -> {
             int index = listViewPasien.getSelectionModel().getSelectedIndex();
+            String selectedPasien = listViewPasien.getSelectionModel().getSelectedItem();
             listPasien.remove(index);
+            hapusDariDatabase(selectedPasien);
         });
+
+        Button btnLogout = new Button("LOGOUT");
+        btnLogout.setStyle("-fx-background-color: #C4DFDF;-fx-font-family: 'Cambria';-fx-font-size: 15px; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-background-radius: 42px; -fx-border-radius: 42px;");
+        btnLogout.setOnAction(v -> {
+            createSceneLogIn();
+        });
+        HBox btnLogoutBox = new HBox(btnLogout);
+        btnLogoutBox.setAlignment(Pos.CENTER);
 
         HBox btn = new HBox(15, btnAdd, btnRemove);
         btn.setAlignment(Pos.CENTER);
 
-        VBox vBox = new VBox(10, daftarPasienBox, listViewPasien, tfName, btn);
+        VBox vBox = new VBox(10, daftarPasienBox, listViewPasien, tfName, btn, btnLogoutBox);
         vBox.setAlignment(Pos.CENTER);
-        vBox.setPadding(new Insets(0, 50, 0, 50));
-        Scene scene = new Scene(vBox, 620, 620);
+        vBox.setPadding(new Insets(0, 100, 0, 100));
+        root.getChildren().add(vBox);
+        Scene scene = new Scene(root, 620, 620);
         stage.setTitle("MediTracker");
         stage.setScene(scene);
+    }
+
+    private void hapusDariDatabase(String selectedPasien) {
+        String url = "jdbc:sqlite:C:\\Users\\USER\\OneDrive\\Documents\\JavaFX\\Project\\app\\src\\main\\java\\meditracker\\Database\\Manager/account.db";
+        String sqlDelete = "DELETE FROM tb_pasien WHERE Nama = ?";
+    
+        try (Connection conn = DriverManager.getConnection(url);
+            PreparedStatement stmtDelete = conn.prepareStatement(sqlDelete)) {
+    
+            stmtDelete.setString(1, selectedPasien);
+            stmtDelete.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Tangani kesalahan saat menghapus data dari database
+        }
     }
 
     private void simpanKeDatabase(String namaPasien) {
@@ -226,29 +261,67 @@ public class App extends Application {
         }
     }
     
-    private void createSceneDetailData(String selectedPasien) {
+    public void createSceneDetailData(String selectedPasien) {
+        Image image = new Image("/fotooo.jpg");
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(620);
+        imageView.setFitWidth(620);
+        StackPane root = new StackPane();
+        root.getChildren().add(imageView);
+
         // Mengambil data pasien dari database berdasarkan nama pasien yang dipilih
         Pasien pasien = getDataPasien(selectedPasien);
     
         // Membuat komponen GUI untuk menampilkan detail data pasien
         Label labelDetail = new Label("Detail Pasien");
-        labelDetail.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 35px; -fx-text-color: #000000; -fx-font-weight: bold;");
+        labelDetail.setStyle("-fx-font-family: 'Cambria'; -fx-font-size:28px; -fx-text-color: #000000; -fx-font-weight: bold;");
         HBox detailBox = new HBox(labelDetail);
         detailBox.setAlignment(Pos.CENTER);
     
         Label labelNama = new Label("Nama:");
+        labelNama.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 15px; -fx-text-color: #000000;");
+
         TextField tfNama = new TextField(pasien.getNama());
+        tfNama.setStyle("-fx-padding: 1px;-fx-background-color: #FFFAF4;-fx-text-fill:BLACK;-fx-font-size: 15px; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
+        tfNama.setPromptText("Masukkan Nama Pasien...");
+        tfNama.setAlignment(Pos.CENTER_LEFT);
+        HBox tfNamaBox = new HBox(tfNama);
+        tfNamaBox.setAlignment(Pos.CENTER);
     
         Label labelUmur = new Label("Umur:");
+        labelUmur.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 15px; -fx-text-color: #000000;");
+
         TextField tfUmur = new TextField(Integer.toString(pasien.getUmur()));
+        tfUmur.setStyle("-fx-padding: 1px;-fx-background-color: #FFFAF4;-fx-text-fill:BLACK;-fx-font-size: 15px; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
+        tfUmur.setPromptText("Masukkan Umur Pasien...");
+        tfUmur.setAlignment(Pos.CENTER_LEFT);
+        HBox tfUmurBox = new HBox(tfUmur);
+        tfUmurBox.setAlignment(Pos.CENTER);
     
         Label labelDiagnosis = new Label("Diagnosis:");
+        labelDiagnosis.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 15px; -fx-text-color: #000000;");
+
         TextField tfDiagnosis = new TextField(pasien.getDiagnosis());
+        tfDiagnosis.setStyle("-fx-padding: 1px;-fx-background-color: #FFFAF4;-fx-text-fill:BLACK;-fx-font-size: 15px; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
+        tfDiagnosis.setPromptText("Masukkan Diagnosis Pasien...");
+        tfDiagnosis.setAlignment(Pos.CENTER_LEFT);
+        HBox tfDiagnosisBox = new HBox(tfDiagnosis);
+        tfDiagnosisBox.setAlignment(Pos.CENTER);
     
         Label labelObat = new Label("Obat:");
+        labelObat.setStyle("-fx-font-family: 'Cambria'; -fx-font-size: 15px; -fx-text-color: #000000;");
+
         TextField tfObat = new TextField(pasien.getObat());
+        tfObat.setStyle("-fx-padding: 1px;-fx-background-color: #FFFAF4;-fx-text-fill:BLACK;-fx-font-size: 15px; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 3;");
+        tfObat.setPromptText("Masukkan Obat Pasien...");
+        tfObat.setAlignment(Pos.CENTER_LEFT);
+        HBox tfObatBox = new HBox(tfObat);
+        tfObatBox.setAlignment(Pos.CENTER);
     
-        Button btnSave = new Button("Simpan");
+        Button btnSave = new Button("SIMPAN & KEMBALI");
+        btnSave.setStyle("-fx-background-color: #C4DFDF;-fx-font-family: 'Cambria';-fx-font-size: 15px; -fx-border-color: BLACK; -fx-border-width: 1px; -fx-background-radius: 42px; -fx-border-radius: 42px;");
+        HBox btnSaveBox = new HBox(btnSave);
+        btnSaveBox.setAlignment(Pos.CENTER);
         btnSave.setOnAction(event -> {
             // Menyimpan perubahan data pasien ke database
             pasien.setNama(tfNama.getText());
@@ -260,12 +333,13 @@ public class App extends Application {
             // Kembali ke halaman portal
             createScenePortal();
         });
-    
-        VBox vBox = new VBox(10, detailBox, labelNama, tfNama, labelUmur, tfUmur, labelDiagnosis, tfDiagnosis, labelObat, tfObat, btnSave);
+        VBox tfBox = new VBox(4,labelNama, tfNama, labelUmur, tfUmur, labelDiagnosis, tfDiagnosis, labelObat, tfObat);
+        VBox vBox = new VBox(20, detailBox,tfBox, btnSave);
         vBox.setAlignment(Pos.CENTER);
-        vBox.setPadding(new Insets(0, 50, 0, 50));
+        vBox.setPadding(new Insets(0, 100, 0, 100));
+        root.getChildren().add(vBox);
     
-        Scene scene = new Scene(vBox, 620, 620);
+        Scene scene = new Scene(root, 620, 620);
         stage.setTitle("MediTracker");
         stage.setScene(scene);
     }
